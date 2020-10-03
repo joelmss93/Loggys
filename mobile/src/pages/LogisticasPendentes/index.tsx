@@ -19,16 +19,8 @@ export interface Logistica {
 const LogisticasPendentes: React.FC = () => {
 
   const [ logisticas, setLogisticas ] = useState<Logistica[]>([]);
-  const [page, setPage] = useState('1');
   
-  useEffect(() =>{
-    // const loadLogisticas = async () => {
-    //   const response = await api.get('/logisticas');
-    //   const data = await response.data.docs;
-    //   setLogisticas(data);
-    // }
-    // loadLogisticas();
-
+  useEffect(() =>{;
     api.get<Logistica[]>('/logisticas').then( ({ data }) => {
       setLogisticas(data);
     });
@@ -79,12 +71,3 @@ const LogisticasPendentes: React.FC = () => {
 }
 
 export default LogisticasPendentes;
-
-      //await api.get('/logisticas').then(res => {setlogisticas(res.data)})
-  // const [ rementente, setRemetente ] = useState('');
-  // const [ destino, setDestino ] = useState('');
-  // const [ localOrigem, setLocalOrigem ] = useState('');
-  // const [ localDestino, setLocalDestino ] = useState('');
-  // const [ localAtual, setLocalAtual ] = useState('');
-  // const [ dataEnvio, setDataEnvio ] = useState('');
-  // const [ dataAtual, setDataAtual ] = useState('');

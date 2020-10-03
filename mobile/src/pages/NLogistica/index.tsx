@@ -26,6 +26,7 @@ const NLogistica: React.FC = () => {
   const [selectedDestino, setSelectedDestino] = useState('CCO');
 
   //Informações da logística
+  const [ logistica, setLogistica ] = useState([]);
   const [ rementente, setRemetente ] = useState('');
   const [ destino, setDestino ] = useState('');
   const [ localOrigem, setLocalOrigem ] = useState('');

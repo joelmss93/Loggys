@@ -24,13 +24,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         borderRadius: 20,
         alignItems: 'center',
-        width: 320,
+        width: 340,
         marginTop: 10,
         marginBottom: 10,
     },
 
     divider: {
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
 
     descriptionHolder:{
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
     
     description: {
         fontFamily: 'Poppins_400Regular',
-        fontSize: 15,
+        fontSize: 14,
         marginBottom: 2,
         marginTop: 2,
         textAlign: "left",
