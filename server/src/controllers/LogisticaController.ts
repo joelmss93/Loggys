@@ -35,7 +35,7 @@ module.exports = {
     },
 
     async delete(req: Request, res: Response){
-        const logistica = await Logistica.findOneAndDelete(req.params.id);
+        const logistica = await Logistica.findByIdAndRemove(req.params.id);
 
         return res.send('Deletado');
     }
