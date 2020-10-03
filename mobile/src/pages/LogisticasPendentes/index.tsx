@@ -43,19 +43,39 @@ const LogisticasPendentes: React.FC = () => {
     <ScrollView>
     <PageHeaderSimple title="Logísticas Pendentes"/>
         <View style={styles.content}>
+        <FlatList
+          data={logisticas}
+          keyExtractor={(logisticas) => logisticas}
+          renderItem={({item: logisticas }) => (
             <RectButton onPress={handleSelecLogistica} style={styles.infoHolder}>
-              <View style={styles.divider}>
-                 <View style={styles.descriptionHolder}>
-                  <Text style={styles.description}>Remetente: Joel</Text>
-                  <Text style={styles.description}>Destino: Delci</Text>
-                  <Text style={styles.description}>Local Atual: P7</Text>
-                  <Text style={styles.description}>Local Destino: CCO</Text>
-                 </View>
-                 <View style={styles.descriptionHolder}>
-                  <Text style={styles.acess}>Acessar</Text>
-                 </View>
-              </View>
-            </RectButton>
+               <View style={styles.divider}>
+                  <View style={styles.descriptionHolder}>
+                   <Text style={styles.description}>Remetente: Joel</Text>
+                   <Text style={styles.description}>Destino: Delci</Text>
+                   <Text style={styles.description}>Local Atual: P7</Text>
+                   <Text style={styles.description}>Local Destino: CCO</Text>
+                  </View>
+                  <View style={styles.descriptionHolder}>
+                   <Text style={styles.acess}>Acessar</Text>
+                  </View>
+               </View>
+             </RectButton>
+          )}>
+              
+             <RectButton onPress={handleSelecLogistica} style={styles.infoHolder}>
+               <View style={styles.divider}>
+                  <View style={styles.descriptionHolder}>
+                   <Text style={styles.description}>Remetente: Joel</Text>
+                   <Text style={styles.description}>Destino: Delci</Text>
+                   <Text style={styles.description}>Local Atual: P7</Text>
+                   <Text style={styles.description}>Local Destino: CCO</Text>
+                  </View>
+                  <View style={styles.descriptionHolder}>
+                   <Text style={styles.acess}>Acessar</Text>
+                  </View>
+               </View>
+             </RectButton>
+          </FlatList>
         </View>
     </ScrollView>
   </SafeAreaView>);
