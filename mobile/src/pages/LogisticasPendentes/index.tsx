@@ -8,20 +8,31 @@ import PageHeaderSimple from '../../components/pageHeaderSimple';
 import api from '../../services/api';
 import styles from './styles';
 
+export interface Logistica {
+  _id: string;
+  remetente: string;
+  destino: string;
+  localAtual: string;
+  localDestino: string;
+}
+
 
 const LogisticasPendentes: React.FC = () => {
-// const LogisticasPendentes = () => {
 
-  const [ logisticas, setLogisticas ] = useState([]);
+  const [ logisticas, setLogisticas ] = useState<Logistica[]>([]);
   const [page, setPage] = useState('1');
   
   useEffect(() =>{
-    const loadLogisticas = async () => {
-      const response = await api.get('/logisticas');
-      const data = await response.data.docs;
+    // const loadLogisticas = async () => {
+    //   const response = await api.get('/logisticas');
+    //   const data = await response.data.docs;
+    //   setLogisticas(data);
+    // }
+    // loadLogisticas();
+
+    api.get<Logistica[]>('/logisticas').then(({ data }) => {
       setLogisticas(data);
-    }
-    loadLogisticas();
+    });
 
   }, []);
 
@@ -43,39 +54,25 @@ const LogisticasPendentes: React.FC = () => {
     <ScrollView>
     <PageHeaderSimple title="Logísticas Pendentes"/>
         <View style={styles.content}>
-        <FlatList
-          data={logisticas}
-          keyExtractor={(logisticas) => logisticas}
-          renderItem={({item: logisticas }) => (
-            <RectButton onPress={handleSelecLogistica} style={styles.infoHolder}>
-               <View style={styles.divider}>
-                  <View style={styles.descriptionHolder}>
-                   <Text style={styles.description}>Remetente: Joel</Text>
-                   <Text style={styles.description}>Destino: Delci</Text>
-                   <Text style={styles.description}>Local Atual: P7</Text>
-                   <Text style={styles.description}>Local Destino: CCO</Text>
+            <FlatList 
+              data={logisticas} 
+              keyExtractor={ (logistica) => logistica._id}
+              renderItem={({ item: logistica }) => (
+                <RectButton onPress={handleSelecLogistica} style={styles.infoHolder}>
+                  <View style={styles.divider}>
+                    <View style={styles.descriptionHolder}>
+                    <Text style={styles.description}>Remetente: {logistica.remetente}</Text>
+                    <Text style={styles.description}>Destino: {logistica.destino}</Text>
+                    <Text style={styles.description}>Local Atual: {logistica.localAtual}</Text>
+                    <Text style={styles.description}>Local Destino: {logistica.localDestino}</Text>
                   </View>
                   <View style={styles.descriptionHolder}>
-                   <Text style={styles.acess}>Acessar</Text>
+                    <Text style={styles.acess}>Acessar</Text>
+                    </View>
                   </View>
-               </View>
-             </RectButton>
-          )}>
-              
-             <RectButton onPress={handleSelecLogistica} style={styles.infoHolder}>
-               <View style={styles.divider}>
-                  <View style={styles.descriptionHolder}>
-                   <Text style={styles.description}>Remetente: Joel</Text>
-                   <Text style={styles.description}>Destino: Delci</Text>
-                   <Text style={styles.description}>Local Atual: P7</Text>
-                   <Text style={styles.description}>Local Destino: CCO</Text>
-                  </View>
-                  <View style={styles.descriptionHolder}>
-                   <Text style={styles.acess}>Acessar</Text>
-                  </View>
-               </View>
-             </RectButton>
-          </FlatList>
+                </RectButton>
+              )}
+            />
         </View>
     </ScrollView>
   </SafeAreaView>);
