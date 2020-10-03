@@ -10,8 +10,8 @@ const Logistica = mongoose.model('Logistica');
 module.exports = {
     async index(req: Request, res: Response){
         const { page = 1 } = req.query;
-        const logistica = await Logistica.paginate( { $where: 'this.localAtual != this.localDestino' } , 
-        { page, limit: 10} );
+        const logistica = await Logistica.find( { $where: 'this.localAtual != this.localDestino' } ); /* , 
+        { page, limit: 10}*/ 
         
         return res.json(logistica);
     },

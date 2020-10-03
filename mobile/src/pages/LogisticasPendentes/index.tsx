@@ -16,7 +16,6 @@ export interface Logistica {
   localDestino: string;
 }
 
-
 const LogisticasPendentes: React.FC = () => {
 
   const [ logisticas, setLogisticas ] = useState<Logistica[]>([]);
@@ -30,7 +29,7 @@ const LogisticasPendentes: React.FC = () => {
     // }
     // loadLogisticas();
 
-    api.get<Logistica[]>('/logisticas').then(({ data }) => {
+    api.get<Logistica[]>('/logisticas').then( ({ data }) => {
       setLogisticas(data);
     });
 
@@ -56,25 +55,25 @@ const LogisticasPendentes: React.FC = () => {
         <View style={styles.content}>
             <FlatList 
               data={logisticas} 
-              keyExtractor={ (logistica) => logistica._id}
-              renderItem={({ item: logistica }) => (
+              keyExtractor={ (Logistica) => Logistica._id}
+              renderItem={({ item: Logistica }) => (
                 <RectButton onPress={handleSelecLogistica} style={styles.infoHolder}>
                   <View style={styles.divider}>
                     <View style={styles.descriptionHolder}>
-                    <Text style={styles.description}>Remetente: {logistica.remetente}</Text>
-                    <Text style={styles.description}>Destino: {logistica.destino}</Text>
-                    <Text style={styles.description}>Local Atual: {logistica.localAtual}</Text>
-                    <Text style={styles.description}>Local Destino: {logistica.localDestino}</Text>
-                  </View>
-                  <View style={styles.descriptionHolder}>
-                    <Text style={styles.acess}>Acessar</Text>
+                      <Text style={styles.description}>Remetente: {Logistica.remetente}</Text>
+                      <Text style={styles.description}>Destino: {Logistica.destino}</Text>
+                      <Text style={styles.description}>Local Atual: {Logistica.localAtual}</Text>
+                      <Text style={styles.description}>Local Destino: {Logistica.localDestino}</Text>
+                    </View>
+                    <View style={styles.descriptionHolder}>
+                      <Text style={styles.acess}>Acessar</Text>
                     </View>
                   </View>
                 </RectButton>
               )}
             />
         </View>
-    </ScrollView>
+      </ScrollView>
   </SafeAreaView>);
   
 }
