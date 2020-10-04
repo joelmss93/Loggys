@@ -55,7 +55,7 @@ const NLogistica: React.FC = () => {
         <View style={styles.content}>
           <TextInput placeholder='Remetente' style={styles.input}></TextInput>
 
-          <TextInput placeholder='Destino' style={styles.input}></TextInput>
+          <TextInput placeholder='Destinatário' style={styles.input}></TextInput>
 
           <Text style={styles.description}>Local de Origem:</Text>
           <Picker style={styles.dropableSelect} selectedValue={selectedOrigem} onValueChange={(itemValue, itemIndex) => setSelectedOrigem(itemValue)}>

@@ -1,41 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import PageHeaderSimple from '../../components/pageHeaderSimple';
-import { useNavigation } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
+import api from '../../services/api';
+import { Logistica } from '../LogisticasPendentes';
+
+interface RouteParams {
+  LogisticaId: string;
+}
 
 const LogisticaInfo: React.FC = () => {
+  const { navigate } = useNavigation();
+  const route = useRoute();
+  const { LogisticaId } = route.params as RouteParams;
+  const [ logistica, setLogistica] = useState<Logistica[]>([]);
+  const [ localAtual, setLocalAtual ] = useState('');
 
-  const getDataAtual = () => {
-    let day = new Date().getDate;
-    let month = new Date().getMonth;
-    let year = new Date().getFullYear
-
-    const fullDate = day + '/' + month + '/' + year;
-    return fullDate;
-  };
+  useEffect (() => {
+    api.get<Logistica[]>('/logisticas').then ( ({ data }) => {
+      setLogistica(data);
+    });
+  }, []);
 
   //Informações da logística
   const [ remetente, setRemetente ] = useState('');
   const [ destino, setDestino ] = useState('');
   const [ localOrigem, setLocalOrigem ] = useState('');
   const [ localDestino, setLocalDestino ] = useState('');
-  const [ localAtual, setLocalAtual ] = useState('');
   const [ dataEnvio, setDataEnvio ] = useState('');
   const [ dataAtual, setDataAtual ] = useState('');
 
-  const { navigate } = useNavigation();
 
   function handleGoBack(){
     navigate('LogisticasPendentes');
   };
 
   function handleAtualizarLogistica(){
-    getDataAtual();
+
   };
   
   return (
@@ -47,19 +53,19 @@ const LogisticaInfo: React.FC = () => {
           Remetente:
         </Text>
         <TextInput style={styles.input} 
-          onChangeText={remetente => setRemetente(remetente)} defaultValue={ remetente }>
+          onChangeText={ remetente => setRemetente(remetente) } defaultValue={ remetente }>
         </TextInput>
         <Text style={styles.description}>
-          Destino:
+          Destinatário:
         </Text>
         <TextInput style={styles.input}
-          onChangeText={ destino => setDestino(destino)} defaultValue={ destino }>
+          onChangeText={ destino => setDestino(destino) } defaultValue={ destino }>
         </TextInput>
         <Text style={styles.description}>
           Local Origem:
         </Text>
         <TextInput style={styles.input}
-          onChangeText={ localOrigem => setLocalOrigem(localOrigem)} defaultValue={ localOrigem }>
+          onChangeText={ localOrigem => setLocalOrigem(localOrigem) } defaultValue={ localOrigem }>
         </TextInput>
         <Text style={styles.description}>
           Local Destino:
@@ -89,7 +95,7 @@ const LogisticaInfo: React.FC = () => {
 
       <View style={styles.btnHolder}>
 
-          <RectButton style={styles.primaryBtn} onPress={handleAtualizarLogistica}>
+          <RectButton style={styles.primaryBtn} onPress={ handleAtualizarLogistica }>
             <Text style={styles.primaryBtnText}>
               Atualizar Dados
             </Text>

@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from 'react';
+import React, { useState, Component, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,14 +20,12 @@ const LogisticasPendentes: React.FC = () => {
 
   const [ logisticas, setLogisticas ] = useState<Logistica[]>([]);
   
-  useEffect(() =>{;
+  useEffect(() => {;
     api.get<Logistica[]>('/logisticas').then( ({ data }) => {
       setLogisticas(data);
     });
 
   }, []);
-
-  console.log(logisticas);
 
   const { navigate } = useNavigation();
 
@@ -35,9 +33,9 @@ const LogisticasPendentes: React.FC = () => {
     navigate('Landing');
   };
 
-  function handleSelecLogistica(){
-    navigate('LogisticaInfo');
-  }
+  const handleSelecLogistica = useCallback((LogisticaId: string) => {
+    navigate('LogisticaInfo', { LogisticaId });
+  }, [navigate]);
 
 
   return (
@@ -49,11 +47,11 @@ const LogisticasPendentes: React.FC = () => {
               data={logisticas} 
               keyExtractor={ (Logistica) => Logistica._id}
               renderItem={({ item: Logistica }) => (
-                <RectButton onPress={handleSelecLogistica} style={styles.infoHolder}>
+                <RectButton onPress={ () => handleSelecLogistica(Logistica._id)} style={styles.infoHolder}>
                   <View style={styles.divider}>
                     <View style={styles.descriptionHolder}>
                       <Text style={styles.description}>Remetente: {Logistica.remetente}</Text>
-                      <Text style={styles.description}>Destino: {Logistica.destino}</Text>
+                      <Text style={styles.description}>Destinatário: {Logistica.destino}</Text>
                       <Text style={styles.description}>Local Atual: {Logistica.localAtual}</Text>
                       <Text style={styles.description}>Local Destino: {Logistica.localDestino}</Text>
                     </View>
@@ -66,8 +64,9 @@ const LogisticasPendentes: React.FC = () => {
             />
         </View>
       </ScrollView>
-  </SafeAreaView>);
-  
+  </SafeAreaView>
+
+  ); 
 }
 
 export default LogisticasPendentes;
