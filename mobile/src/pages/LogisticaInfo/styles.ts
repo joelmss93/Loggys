@@ -41,6 +41,18 @@ const styles = StyleSheet.create({
         color: '#817C7C',
     },
 
+    dropableSelect: {
+        marginTop: 30,
+        color: 'black',
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 18,
+        width: '80%',
+        backgroundColor: '#FFF',
+        padding: 15,
+        height: 55,
+        borderRadius: 15,
+    },
+
     
     btnHolder:{
         flexDirection: 'row',
