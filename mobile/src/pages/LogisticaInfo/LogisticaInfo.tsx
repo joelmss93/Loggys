@@ -8,7 +8,7 @@ import { RectButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import api from '../../services/api';
-import { Logistica } from '../LogisticasPendentes';
+// import { Logistica } from '../LogisticasPendentes';
 
 interface RouteParams {
   LogisticaId: string;
@@ -17,6 +17,17 @@ interface RouteParams {
 interface LogisticaSelected {
   _id: string;
   localAtual: string;
+}
+
+export interface Logistica{
+  _id: string;
+  remetente: string;
+  destino: string;
+  localOrigem: string;
+  localDestino: string;
+  localAtual: string;
+  dataEnvio: string;
+  dataAtual: string;
 }
 
 const LogisticaInfo: React.FC = () => {
@@ -28,7 +39,7 @@ const LogisticaInfo: React.FC = () => {
   const [ selectedLocalAtual, setSelectedLocalAtual ] = useState('');
 
   useEffect (() => {
-    api.get<Logistica[]>('/logisticas').then ( ({ data }) => {
+    api.get<Logistica[]>('/logisticas/'+ LogisticaId).then ( ({ data }) => {
       setLogistica(data);
     });
   }, []);
@@ -47,15 +58,15 @@ const LogisticaInfo: React.FC = () => {
   };
 
   const handleAtualizarLogistica = useCallback(async () => {
-    try {
-      await api.put('/logisticas/{$logisticaId}', { Logisitca: LogisticaId, selectedLocalAtual });
+    // try {
+    //   await api.put('/logisticas/${LogisticaId}', { Logisitca: LogisticaId, selectedLocalAtual });
 
-      Alert.alert('Logistica atualizada com sucesso!');
+    //   Alert.alert('Logistica atualizada com sucesso!');
 
-    } catch (error) {
-      Alert.alert('Erro ao atualizar dados, tente novamente.');
-      
-    }
+    // } catch (error) {
+    //   Alert.alert('Erro ao atualizar dados, tente novamente.');
+
+    // }
   }, [ logistica, selectedLocalAtual ]);
   
   return (
