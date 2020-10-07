@@ -27,6 +27,8 @@ const LogisticasPendentes: React.FC = () => {
 
   }, []);
 
+  console.log(logisticas);
+
   const { navigate } = useNavigation();
 
   function handleGoBack(){
@@ -44,8 +46,8 @@ const LogisticasPendentes: React.FC = () => {
     <PageHeaderSimple title="Logísticas Pendentes"/>
         <View style={styles.content}>
             <FlatList 
-              data={logisticas} 
-              keyExtractor={ (Logistica) => Logistica._id}
+              data={ logisticas } 
+              keyExtractor={ (Logistica) => Logistica._id }
               renderItem={({ item: Logistica }) => (
                 <RectButton onPress={ () => handleSelecLogistica(Logistica._id)} style={styles.infoHolder}>
                   <View style={styles.divider}>

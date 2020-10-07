@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Landing from '../pages/Landing';
 import NLogistica from '../pages/NLogistica';
 import LogisticasPendentes from '../pages/LogisticasPendentes';
-import LogisticaInfo from '../pages/LogisticaInfo/LogisticaInfo';
+import LogisticaInfo from '../pages/LogisticaInfo';
 
 const { Navigator, Screen } = createStackNavigator();
 

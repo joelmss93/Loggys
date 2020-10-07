@@ -1,25 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, TextInput, Text, Picker, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import PageHeaderSimple from '../../components/pageHeaderSimple';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import api from '../../services/api';
+import LogisticasPendentes from '../LogisticasPendentes';
 // import { Logistica } from '../LogisticasPendentes';
 
 interface RouteParams {
   LogisticaId: string;
-}
+};
 
 interface LogisticaSelected {
   _id: string;
   localAtual: string;
-}
+};
 
-export interface Logistica{
+interface Logistica {
   _id: string;
   remetente: string;
   destino: string;
@@ -28,21 +29,26 @@ export interface Logistica{
   localAtual: string;
   dataEnvio: string;
   dataAtual: string;
-}
+};
 
 const LogisticaInfo: React.FC = () => {
+
   const { navigate } = useNavigation();
   const route = useRoute();
   const { LogisticaId } = route.params as RouteParams;
-  const [ logistica, setLogistica] = useState<Logistica[]>([]);
   const [ localAtual, setLocalAtual ] = useState('');
   const [ selectedLocalAtual, setSelectedLocalAtual ] = useState('');
-
+  const [ logisticas, setLogisticas] = useState<Logistica[]>([]);
+  const [ selectedLogistica, setSelectedLogistica ] = useState(LogisticaId);
+  
   useEffect (() => {
-    api.get<Logistica[]>('/logisticas/'+ LogisticaId).then ( ({ data }) => {
-      setLogistica(data);
+    api.get<Logistica[]>('/logisticas/' + selectedLogistica).then( ({ data }) => {
+      setLogisticas(data);
     });
+
   }, []);
+
+  console.log(logisticas);
 
   //Informações da logística
   const [ remetente, setRemetente ] = useState('');
@@ -52,6 +58,7 @@ const LogisticaInfo: React.FC = () => {
   const [ dataEnvio, setDataEnvio ] = useState('');
   const [ dataAtual, setDataAtual ] = useState('');
 
+  const date = [ logisticas ];
 
   function handleGoBack(){
     navigate('LogisticasPendentes');
@@ -67,55 +74,63 @@ const LogisticaInfo: React.FC = () => {
     //   Alert.alert('Erro ao atualizar dados, tente novamente.');
 
     // }
-  }, [ logistica, selectedLocalAtual ]);
+  }, [ LogisticasPendentes, selectedLocalAtual ]);
   
   return (
   <SafeAreaView style={styles.container}>
     <ScrollView>
       <PageHeaderSimple title="Logística"/>
       <View style={styles.content}>
-        <Text style={styles.description} >
-          Remetente:
-        </Text>
-        <TextInput style={styles.input} editable={ false }
-          onChangeText={ remetente => setRemetente(remetente) } defaultValue={ remetente }>
-        </TextInput>
-        <Text style={styles.description}>
-          Destinatário:
-        </Text>
-        <TextInput style={styles.input} editable={ false }
-          onChangeText={ destino => setDestino(destino) } defaultValue={ destino }>
-        </TextInput>
-        <Text style={styles.description}>
-          Local Origem:
-        </Text>
-        <TextInput style={styles.input} editable={ false }
-          onChangeText={ localOrigem => setLocalOrigem(localOrigem) } defaultValue={ localOrigem }>
-        </TextInput>
-        <Text style={styles.description}>
-          Local Destino:
-        </Text>
-        <TextInput style={styles.input} editable={ false }
-          onChangeText={ localDestino => setLocalDestino(localDestino) } defaultValue={ localDestino }>
-        </TextInput>
-        <Text style={styles.description}>
-          Data de envio:
-        </Text>
-        <TextInput style={styles.input} editable={ false }
-          onChangeText={ dataEnvio => setDataEnvio(dataEnvio) } defaultValue={ dataEnvio }>
-        </TextInput>
-        <Text style={styles.description}>
-          Última atualização:
-        </Text>
-        <TextInput style={styles.input}  editable={ false }
-          onChangeText={ dataAtual => setDataAtual(dataAtual) } defaultValue={ dataAtual }>
-        </TextInput>
-        <Text style={styles.description}>
-          Local Atual:
-        </Text>
-        <TextInput style={styles.input} editable={ false }
-          onChangeText={ localAtual => setLocalAtual(localAtual) } defaultValue={ localAtual }>
-        </TextInput>
+      <FlatList
+          data={ [logisticas] } 
+          keyExtractor={ (Logistica) => Logistica._id }
+          renderItem={({ item: Logistica }) => (
+            <View>
+              <Text style={styles.description}>
+                Remetente:
+              </Text>
+              <TextInput style={styles.input} editable={false}
+              defaultValue={Logistica.remetente}>
+              </TextInput>
+              <Text style={styles.description}>
+                Destinatário:
+              </Text>
+              <TextInput style={styles.input} editable={false}
+               defaultValue={Logistica.destino}>
+              </TextInput>
+              <Text style={styles.description}>
+                Local Origem:
+              </Text>
+              <TextInput style={styles.input} editable={false}
+               defaultValue={Logistica.localOrigem}>
+              </TextInput>
+              <Text style={styles.description}>
+                Local Destino:
+              </Text>
+              <TextInput style={styles.input} editable={false}
+               defaultValue={Logistica.localDestino}>
+              </TextInput>
+              <Text style={styles.description}>
+                Data de envio:
+              </Text>
+              <TextInput style={styles.input} editable={false}
+               defaultValue={Logistica.dataEnvio}>
+              </TextInput>
+              <Text style={styles.description}>
+                Última atualização:
+              </Text>
+              <TextInput style={styles.input} editable={false}
+               defaultValue={Logistica.dataAtual}>
+              </TextInput>
+              <Text style={styles.description}>
+                Local Atual:
+              </Text>
+              <TextInput style={styles.input} editable={false}
+               defaultValue={Logistica.localAtual}>
+              </TextInput>
+            </ View>
+        
+        )} />
         <Text style={styles.description}>
           Novo local atual:
         </Text>
@@ -144,8 +159,8 @@ const LogisticaInfo: React.FC = () => {
             <Picker.Item label="SAU11" value="SAU11"/>
             <Picker.Item label="SAU12" value="SAU12"/>
           </Picker>
-      </View>
 
+        </View>
       <View style={styles.btnHolder}>
 
           <RectButton style={styles.primaryBtn} onPress={ handleAtualizarLogistica }>
@@ -159,7 +174,6 @@ const LogisticaInfo: React.FC = () => {
               Voltar
             </Text>
           </RectButton>
-
         </View>
     </ScrollView>
   </SafeAreaView>
