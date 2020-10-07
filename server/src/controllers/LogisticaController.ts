@@ -17,7 +17,7 @@ module.exports = {
     async show(req: Request, res: Response){
         const logistica = await Logistica.findById(req.params.id);
 
-        return res.json(logistica);
+        return res.json([logistica]);
     },
 
     async store(req: Request, res: Response){

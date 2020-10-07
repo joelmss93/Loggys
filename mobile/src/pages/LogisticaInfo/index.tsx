@@ -82,7 +82,7 @@ const LogisticaInfo: React.FC = () => {
       <PageHeaderSimple title="Logística"/>
       <View style={styles.content}>
       <FlatList
-          data={ [logisticas] } 
+          data={ logisticas } 
           keyExtractor={ (Logistica) => Logistica._id }
           renderItem={({ item: Logistica }) => (
             <View>
