@@ -65,15 +65,15 @@ const LogisticaInfo: React.FC = () => {
   };
 
   const handleAtualizarLogistica = useCallback(async () => {
-    // try {
-    //   await api.put('/logisticas/${LogisticaId}', { Logisitca: LogisticaId, selectedLocalAtual });
+    try {
+      await api.put('/logisticas/'+LogisticaId, { localAtual: selectedLocalAtual });
 
-    //   Alert.alert('Logistica atualizada com sucesso!');
+      Alert.alert('Logistica atualizada com sucesso!');
 
-    // } catch (error) {
-    //   Alert.alert('Erro ao atualizar dados, tente novamente.');
+    } catch (error) {
+      Alert.alert('Erro ao atualizar dados, tente novamente.');
 
-    // }
+    }
   }, [ LogisticasPendentes, selectedLocalAtual ]);
   
   return (
