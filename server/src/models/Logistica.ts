@@ -28,17 +28,17 @@ const LogisticaSchema = new mongoose.Schema({
         required: true,
     },
 
-    dataEnvio:{
-        type: String,
-        required: true,
-    },
+    // dataEnvio:{
+    //     type: String,
+    //     required: true,
+    // },
 
-    dataAtual:{
-        type: String,
-        required: true,
-    },
+    // dataAtual:{
+    //     type: String,
+    //     required: true,
+    // },
 
-});
+}, {timestamps: {createdAt: 'dataEnvio', updatedAt: 'dataAtual'}});
 
 LogisticaSchema.plugin(mongoosePaginate);
 mongoose.model('Logistica', LogisticaSchema);

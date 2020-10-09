@@ -19,31 +19,13 @@ interface Logistica {
 
 const NLogistica: React.FC = () => {
 
-  const getDatAtual = () => {
-    var day = new Date().getDate;
-    var month = new Date().getMonth;
-    var year = new Date().getFullYear
-
-    const fullDate = day + '/' + month + '/' + year;
-    console.log(fullDate);
-    return fullDate;
-  };
-
   const { navigate } = useNavigation();
 
-  //Local onde será armazenado os valores do Dropdown  
+  //Informações da logística
+  const [ remetente, setRemetente ] = useState('');
+  const [ destino, setDestino ] = useState('');
   const [selectedOrigem, setSelectedOrigem] = useState('CCO');
   const [selectedDestino, setSelectedDestino] = useState('CCO');
-
-  //Informações da logística
-  const [ logistica, setLogistica ] = useState([]);
-  const [ rementente, setRemetente ] = useState('');
-  const [ destino, setDestino ] = useState('');
-  const [ localOrigem, setLocalOrigem ] = useState('');
-  const [ localDestino, setLocalDestino ] = useState('');
-  const [ localAtual, setLocalAtual ] = useState('');
-  const [ dataEnvio, setDataEnvio ] = useState('');
-  const [ dataAtual, setDataAtual ] = useState('');
 
   function handleGoBack(){
         navigate('Landing');
@@ -51,8 +33,10 @@ const NLogistica: React.FC = () => {
 
   function handleGerarLogistica(){
     try {
-      if (rementente != '' && destino != '' && localOrigem!= '' && localDestino != '' ){
-        api.post('/logisticas', { remetente: rementente, destino: destino, localOrigem: localOrigem, localDesrino: localDestino, localAtual: localOrigem})
+      if ( remetente != '' || destino != '' || selectedOrigem != '' || selectedDestino != '' ){
+        api.post('/logisticas', { remetente: remetente, destino: destino, localOrigem: selectedOrigem,
+           localDestino: selectedDestino, localAtual: selectedOrigem})
+        Alert.alert('Logística gravada com sucesso!');
       }
       else{ 
         Alert.alert('Ops, alguns campos não estão preenchidos.')
@@ -69,12 +53,15 @@ const NLogistica: React.FC = () => {
         <ScrollView>
         <PageHeader title="Nova Logística"/>
         <View style={styles.content}>
-          <TextInput placeholder='Remetente' style={styles.input}></TextInput>
+          <TextInput placeholder='Remetente' style={styles.input}
+            onChangeText={ text => setRemetente(text) }></TextInput>
 
-          <TextInput placeholder='Destinatário' style={styles.input}></TextInput>
+          <TextInput placeholder='Destinatário' style={styles.input}
+            onChangeText={ text => setDestino(text) }></TextInput>
 
           <Text style={styles.description}>Local de Origem:</Text>
-          <Picker style={styles.dropableSelect} selectedValue={selectedOrigem} onValueChange={(itemValue, itemIndex) => setSelectedOrigem(itemValue)}>
+          <Picker style={styles.dropableSelect} selectedValue={selectedOrigem} 
+            onValueChange={(itemValue, itemIndex) => setSelectedOrigem(itemValue)}>
             <Picker.Item label="CCO" value="CCO"/>
             <Picker.Item label="Almoxarifado" value="Almoxarifado"/>
             <Picker.Item label="P1" value="P1"/>
