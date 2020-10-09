@@ -36,29 +36,15 @@ const LogisticaInfo: React.FC = () => {
   const { navigate } = useNavigation();
   const route = useRoute();
   const { LogisticaId } = route.params as RouteParams;
-  const [ localAtual, setLocalAtual ] = useState('');
   const [ selectedLocalAtual, setSelectedLocalAtual ] = useState('');
   const [ logisticas, setLogisticas] = useState<Logistica[]>([]);
-  const [ selectedLogistica, setSelectedLogistica ] = useState(LogisticaId);
   
   useEffect (() => {
-    api.get<Logistica[]>('/logisticas/' + selectedLogistica).then( ({ data }) => {
+    api.get<Logistica[]>('/logisticas/' + LogisticaId).then( ({ data }) => {
       setLogisticas(data);
     });
 
   }, []);
-
-  console.log(logisticas);
-
-  //Informações da logística
-  const [ remetente, setRemetente ] = useState('');
-  const [ destino, setDestino ] = useState('');
-  const [ localOrigem, setLocalOrigem ] = useState('');
-  const [ localDestino, setLocalDestino ] = useState('');
-  const [ dataEnvio, setDataEnvio ] = useState('');
-  const [ dataAtual, setDataAtual ] = useState('');
-
-  const date = [ logisticas ];
 
   function handleGoBack(){
     navigate('LogisticasPendentes');

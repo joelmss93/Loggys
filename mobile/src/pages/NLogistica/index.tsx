@@ -6,6 +6,16 @@ import PageHeader from '../../components/PageHeader';
 import { ScrollView, RectButton } from 'react-native-gesture-handler';
 import api from '../../services/api';
 
+interface Logistica {
+  _id: string;
+  remetente: string;
+  destino: string;
+  localOrigem: string;
+  localDestino: string;
+  localAtual: string;
+  dataEnvio: string;
+  dataAtual: string;
+};
 
 const NLogistica: React.FC = () => {
 
@@ -40,12 +50,12 @@ const NLogistica: React.FC = () => {
   };
 
   function handleGerarLogistica(){
-    var day = new Date().getDate;
-    var month = new Date().getMonth;
-    var year = new Date().getFullYear
+    try {
+      api.post('/logisticas', )
+    } catch (error) {
+      
 
-    const fullDate = day + '/' + month + '/' + year;
-    Alert.alert('Data Atual: ' + fullDate);
+    }
   };
 
   return (

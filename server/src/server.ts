@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use('/api', routes);
 
-mongoose.connect('mongodb://192.168.0.105:27017/loggys', 
+mongoose.connect('mongodb://192.168.0.101:27017/loggys', 
 { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
 );
 
