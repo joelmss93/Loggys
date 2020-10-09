@@ -51,11 +51,17 @@ const NLogistica: React.FC = () => {
 
   function handleGerarLogistica(){
     try {
-      api.post('/logisticas', )
-    } catch (error) {
-      
+      if (rementente != '' && destino != '' && localOrigem!= '' && localDestino != '' ){
+        api.post('/logisticas', { remetente: rementente, destino: destino, localOrigem: localOrigem, localDesrino: localDestino, localAtual: localOrigem})
+      }
+      else{ 
+        Alert.alert('Ops, alguns campos não estão preenchidos.')
+      }
 
-    }
+    } catch (error) {
+        Alert.alert('Erro ao conectar com o servidor, tente novamente.')    
+
+      }
   };
 
   return (
