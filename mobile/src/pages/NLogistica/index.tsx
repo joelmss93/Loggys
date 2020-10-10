@@ -90,7 +90,8 @@ const NLogistica: React.FC = () => {
           </Picker>
 
           <Text style={styles.description}>Local de Destino:</Text>
-          <Picker style={styles.dropableSelect} selectedValue={selectedDestino} onValueChange={(itemValue, itemIndex) => setSelectedDestino(itemValue)}>
+          <Picker style={styles.dropableSelect} selectedValue={selectedDestino} 
+            onValueChange={(itemValue, itemIndex) => setSelectedDestino(itemValue)}>
             <Picker.Item label="CCO" value="CCO"/>
             <Picker.Item label="Almoxarifado" value="Almoxarifado"/>
             <Picker.Item label="P1" value="P1"/>

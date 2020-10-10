@@ -122,7 +122,8 @@ const LogisticaInfo: React.FC = () => {
         <Text style={styles.description}>
           Novo local atual:
         </Text>
-        <Picker style={styles.dropableSelect} selectedValue={ selectedLocalAtual } onValueChange={(itemValue, itemIndex) => setSelectedLocalAtual(itemValue)}>
+        <Picker style={styles.dropableSelect} selectedValue={ selectedLocalAtual } 
+          onValueChange={(itemValue, itemIndex) => setSelectedLocalAtual(itemValue)}>
             <Picker.Item label="CCO" value="CCO"/>
             <Picker.Item label="Almoxarifado" value="Almoxarifado"/>
             <Picker.Item label="P1" value="P1"/>
