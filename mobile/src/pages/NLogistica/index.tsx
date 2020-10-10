@@ -6,6 +6,8 @@ import PageHeader from '../../components/PageHeader';
 import { ScrollView, RectButton } from 'react-native-gesture-handler';
 import api from '../../services/api';
 
+console.disableYellowBox = true;
+
 interface Logistica {
   _id: string;
   remetente: string;

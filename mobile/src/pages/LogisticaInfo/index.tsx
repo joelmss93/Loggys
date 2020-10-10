@@ -9,7 +9,8 @@ import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 import api from '../../services/api';
 import LogisticasPendentes from '../LogisticasPendentes';
-// import { Logistica } from '../LogisticasPendentes';
+
+console.disableYellowBox = true;
 
 interface RouteParams {
   LogisticaId: string;
@@ -30,6 +31,7 @@ interface Logistica {
   dataEnvio: string;
   dataAtual: string;
 };
+
 
 const LogisticaInfo: React.FC = () => {
 

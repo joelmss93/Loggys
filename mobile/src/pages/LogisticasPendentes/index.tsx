@@ -8,6 +8,8 @@ import PageHeaderSimple from '../../components/pageHeaderSimple';
 import api from '../../services/api';
 import styles from './styles';
 
+console.disableYellowBox = true;
+
 export interface Logistica {
   _id: string;
   remetente: string;
