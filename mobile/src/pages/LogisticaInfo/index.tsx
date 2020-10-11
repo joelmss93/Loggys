@@ -56,7 +56,7 @@ const LogisticaInfo: React.FC = () => {
     try {
       await api.put('/logisticas/'+LogisticaId, { localAtual: selectedLocalAtual });
 
-      Alert.alert('Logistica atualizada com sucesso!');
+      Alert.alert('Logística atualizada com sucesso!');
 
     } catch (error) {
       Alert.alert('Erro ao atualizar dados, tente novamente.');
