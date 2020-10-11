@@ -19,6 +19,8 @@ mongoose.connect('mongodb://192.168.0.105:27017/loggys',
 
 requireDir('./models');
 
+// console.log(date);
+
 
 //App ira responder na porta 3333
 app.listen('3333', () => {

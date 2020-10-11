@@ -1,5 +1,6 @@
 const mongoose  =  require ('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
+const timeZone = require('mongoose-timezone');
 
 const LogisticaSchema = new mongoose.Schema({
 
@@ -28,17 +29,8 @@ const LogisticaSchema = new mongoose.Schema({
         required: true,
     },
 
-    // dataEnvio:{
-    //     type: String,
-    //     required: true,
-    // },
+}, { timestamps: { createdAt: 'dataEnvio', updatedAt: 'dataAtual' } });
 
-    // dataAtual:{
-    //     type: String,
-    //     required: true,
-    // },
-
-}, {timestamps: {createdAt: 'dataEnvio', updatedAt: 'dataAtual'}});
-
+// LogisticaSchema.plugin(timeZone);
 LogisticaSchema.plugin(mongoosePaginate);
 mongoose.model('Logistica', LogisticaSchema);
