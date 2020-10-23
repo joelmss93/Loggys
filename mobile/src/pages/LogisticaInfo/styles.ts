@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins_400Regular',
         fontSize: 18,
         width: 315,
-        height: 100,
+        height: 130,
         backgroundColor: '#FFF',
         borderRadius: 15,
         paddingTop: 5,

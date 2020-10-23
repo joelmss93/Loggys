@@ -28,6 +28,7 @@ interface Logistica {
   localOrigem: string;
   localDestino: string;
   localAtual: string;
+  descricao: string;
   dataEnvio: string;
   dataAtual: string;
 };
@@ -60,7 +61,7 @@ const LogisticaInfo: React.FC = () => {
       navigate('LogisticasPendentes');
 
     } catch (error) {
-      Alert.alert('Erro ao atualizar dados, tente novamente.');
+      Alert.alert('QAP serivor! Acho que não conseguiremos atualizar agora...');
 
     }
   }, [ LogisticasPendentes, selectedLocalAtual ]);
@@ -85,31 +86,40 @@ const LogisticaInfo: React.FC = () => {
                 Destinatário:
               </Text>
               <TextInput style={styles.input} editable={false}
-               defaultValue={Logistica.destino}>
-              </TextInput>
+               defaultValue={Logistica.destino} />
+
               <Text style={styles.description}>
                 Local Origem:
               </Text>
               <TextInput style={styles.input} editable={false}
                defaultValue={Logistica.localOrigem} />
-              <TextInput placeholder='Descrição' style={styles.descriptionInput}
+
+              <Text style={styles.description}>
+                Descrição:
+              </Text>
+              <TextInput style={styles.descriptionInput}
                 multiline
-                editable={false} />   
+                defaultValue={Logistica.descricao}
+                editable={false} />
+
               <Text style={styles.description}>
                 Local Destino:
               </Text>
               <TextInput style={styles.input} editable={false}
                defaultValue={Logistica.localDestino} />
+
               <Text style={styles.description}>
                 Data de envio:
               </Text>
               <TextInput style={styles.input} editable={false}
                defaultValue={Logistica.dataEnvio} />
+
               <Text style={styles.description}>
                 Última atualização:
               </Text>
               <TextInput style={styles.input} editable={false}
                defaultValue={Logistica.dataAtual} />
+
               <Text style={styles.description}>
                 Local Atual:
               </Text>

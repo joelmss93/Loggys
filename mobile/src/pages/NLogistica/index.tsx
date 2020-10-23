@@ -26,7 +26,7 @@ const NLogistica: React.FC = () => {
   //Informações da logística
   const [ remetente, setRemetente ] = useState('');
   const [ destino, setDestino ] = useState('');
-  const [ description, setDescription ] = useState('');
+  const [ descricao, setDescricao ] = useState('');
   const [selectedOrigem, setSelectedOrigem] = useState('CCO');
   const [selectedDestino, setSelectedDestino] = useState('CCO');
 
@@ -38,7 +38,7 @@ const NLogistica: React.FC = () => {
     try {
       if ( remetente != '' || destino != '' || selectedOrigem != '' || selectedDestino != '' ){
         api.post('/logisticas', { remetente: remetente, destino: destino, localOrigem: selectedOrigem,
-           localDestino: selectedDestino, localAtual: selectedOrigem})
+           localDestino: selectedDestino, localAtual: selectedOrigem, descricao: descricao })
            
         Alert.alert('Logística gravada com sucesso!');
 
@@ -67,7 +67,7 @@ const NLogistica: React.FC = () => {
           
           <TextInput placeholder='Descrição' style={styles.descriptionInput}
             multiline
-            onChangeText={ text => setDescription(text) } />          
+            onChangeText={ text => setDescricao(text) } />          
 
           <Text style={styles.description}>Local de Origem:</Text>
           <Picker style={styles.dropableSelect} selectedValue={selectedOrigem} 
