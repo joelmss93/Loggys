@@ -28,6 +28,19 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
     },
 
+    descriptionInput: {
+        marginTop: 30,
+        color: 'black',
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 18,
+        width: '80%',
+        height: 100,
+        backgroundColor: '#FFF',
+        borderRadius: 15,
+        paddingTop: 5,
+        paddingLeft: 10,
+    },
+
     description: {
         marginTop: 10,
         fontFamily: 'Poppins_400Regular',

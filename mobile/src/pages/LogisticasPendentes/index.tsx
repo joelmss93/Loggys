@@ -1,6 +1,6 @@
 import React, { useState, Component, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, RectButton, FlatList } from 'react-native-gesture-handler';
 
@@ -22,12 +22,12 @@ const LogisticasPendentes: React.FC = () => {
 
   const [ logisticas, setLogisticas ] = useState<Logistica[]>([]);
   
-  useEffect(() => {;
+  useFocusEffect(() => {;
     api.get<Logistica[]>('/logisticas').then( ({ data }) => {
       setLogisticas(data);
     });
 
-  }, []);
+  });
 
   console.log(logisticas);
 

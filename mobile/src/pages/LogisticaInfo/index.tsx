@@ -42,7 +42,7 @@ const LogisticaInfo: React.FC = () => {
   const [ logisticas, setLogisticas] = useState<Logistica[]>([]);
   
   useEffect (() => {
-    api.get<Logistica[]>('/logisticas/' + LogisticaId).then( ({ data }) => {
+    api.get<Logistica[]>(`/logisticas/${LogisticaId}`).then( ({ data }) => {
       setLogisticas(data);
     });
 
@@ -54,9 +54,10 @@ const LogisticaInfo: React.FC = () => {
 
   const handleAtualizarLogistica = useCallback(async () => {
     try {
-      await api.put('/logisticas/'+LogisticaId, { localAtual: selectedLocalAtual });
+      await api.put(`/logisticas/${LogisticaId}`, { localAtual: selectedLocalAtual });
 
       Alert.alert('Logística atualizada com sucesso!');
+      navigate('LogisticasPendentes');
 
     } catch (error) {
       Alert.alert('Erro ao atualizar dados, tente novamente.');
@@ -78,8 +79,8 @@ const LogisticaInfo: React.FC = () => {
                 Remetente:
               </Text>
               <TextInput style={styles.input} editable={false}
-              defaultValue={Logistica.remetente}>
-              </TextInput>
+              defaultValue={Logistica.remetente} />
+
               <Text style={styles.description}>
                 Destinatário:
               </Text>
@@ -90,32 +91,30 @@ const LogisticaInfo: React.FC = () => {
                 Local Origem:
               </Text>
               <TextInput style={styles.input} editable={false}
-               defaultValue={Logistica.localOrigem}>
-              </TextInput>
+               defaultValue={Logistica.localOrigem} />
+              <TextInput placeholder='Descrição' style={styles.descriptionInput}
+                multiline
+                editable={false} />   
               <Text style={styles.description}>
                 Local Destino:
               </Text>
               <TextInput style={styles.input} editable={false}
-               defaultValue={Logistica.localDestino}>
-              </TextInput>
+               defaultValue={Logistica.localDestino} />
               <Text style={styles.description}>
                 Data de envio:
               </Text>
               <TextInput style={styles.input} editable={false}
-               defaultValue={Logistica.dataEnvio}>
-              </TextInput>
+               defaultValue={Logistica.dataEnvio} />
               <Text style={styles.description}>
                 Última atualização:
               </Text>
               <TextInput style={styles.input} editable={false}
-               defaultValue={Logistica.dataAtual}>
-              </TextInput>
+               defaultValue={Logistica.dataAtual} />
               <Text style={styles.description}>
                 Local Atual:
               </Text>
               <TextInput style={styles.input} editable={false}
-               defaultValue={Logistica.localAtual}>
-              </TextInput>
+               defaultValue={Logistica.localAtual} />
             </ View>
         
         )} />

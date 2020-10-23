@@ -26,6 +26,7 @@ const NLogistica: React.FC = () => {
   //Informações da logística
   const [ remetente, setRemetente ] = useState('');
   const [ destino, setDestino ] = useState('');
+  const [ description, setDescription ] = useState('');
   const [selectedOrigem, setSelectedOrigem] = useState('CCO');
   const [selectedDestino, setSelectedDestino] = useState('CCO');
 
@@ -38,14 +39,17 @@ const NLogistica: React.FC = () => {
       if ( remetente != '' || destino != '' || selectedOrigem != '' || selectedDestino != '' ){
         api.post('/logisticas', { remetente: remetente, destino: destino, localOrigem: selectedOrigem,
            localDestino: selectedDestino, localAtual: selectedOrigem})
+           
         Alert.alert('Logística gravada com sucesso!');
+
+        navigate('Landing');
       }
       else{ 
-        Alert.alert('Ops, alguns campos não estão preenchidos.')
+        Alert.alert('Ops, acho que esquecemos de preencher algo.');
       }
 
     } catch (error) {
-        Alert.alert('Erro ao conectar com o servidor, tente novamente.')    
+        Alert.alert('QAP servidor! QAP? Acho que não temos conexão');  
 
       }
   };
@@ -56,10 +60,14 @@ const NLogistica: React.FC = () => {
         <PageHeader title="Nova Logística"/>
         <View style={styles.content}>
           <TextInput placeholder='Remetente' style={styles.input}
-            onChangeText={ text => setRemetente(text) }></TextInput>
+            onChangeText={ text => setRemetente(text) } />
 
           <TextInput placeholder='Destinatário' style={styles.input}
-            onChangeText={ text => setDestino(text) }></TextInput>
+            onChangeText={ text => setDestino(text) } />
+          
+          <TextInput placeholder='Descrição' style={styles.descriptionInput}
+            multiline
+            onChangeText={ text => setDescription(text) } />          
 
           <Text style={styles.description}>Local de Origem:</Text>
           <Picker style={styles.dropableSelect} selectedValue={selectedOrigem} 

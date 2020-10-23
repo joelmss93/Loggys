@@ -32,5 +32,5 @@ const LogisticaSchema = new mongoose.Schema({
 }, { timestamps: { createdAt: 'dataEnvio', updatedAt: 'dataAtual' } });
 
 // LogisticaSchema.plugin(timeZone);
-LogisticaSchema.plugin(mongoosePaginate);
+// LogisticaSchema.plugin(mongoosePaginate);
 mongoose.model('Logistica', LogisticaSchema);
